@@ -1,0 +1,11 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Boat Finance (Web)",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "web-server"
+    }
+  ]
+}
