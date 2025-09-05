@@ -14,14 +14,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Set up Flutter (specific version with Dart 3.9+)
+      # 2. Set up Flutter (latest stable with Dart 3.9+)
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.39.0'
+          flutter-version: '3.13.10'
           channel: stable
 
-      # 3. Print Flutter and Dart versions (optional, for debugging)
+      # 3. Print Flutter & Dart versions (optional, for debugging)
       - name: Show Flutter & Dart versions
         run: |
           flutter --version
