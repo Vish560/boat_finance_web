@@ -1,4 +1,4 @@
-name: Deploy Flutter Web App to GitHub Pages
+name: Deploy Flutter Web to GitHub Pages
 
 on:
   push:
@@ -6,38 +6,31 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout repository
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      # Checkout the repository
+      - uses: actions/checkout@v3
 
-      # 2. Set up Flutter (latest stable with Dart 3.9+)
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
+      # Install Flutter via subosito/flutter-action with a stable version that works
+      - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.13.10'
+          flutter-version: '3.12.0'
           channel: stable
 
-      # 3. Print Flutter & Dart versions (optional, for debugging)
-      - name: Show Flutter & Dart versions
-        run: |
-          flutter --version
-          dart --version
+      # Enable flutter web
+      - run: flutter config --enable-web
 
-      # 4. Install dependencies
-      - name: Install dependencies
-        run: flutter pub get
+      # Get dependencies
+      - run: flutter pub get
 
-      # 5. Build Flutter web
-      - name: Build Flutter web
-        run: flutter build web --release --base-href /boat_finance_web/
+      # Build the Flutter web app
+      - run: flutter build web --release
 
-      # 6. Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      # Deploy to GitHub Pages
+      - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/web
+          publish_branch: gh-pages
