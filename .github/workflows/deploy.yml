@@ -14,11 +14,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Set up latest stable Flutter
+      # 2. Set up Flutter (fixed version)
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: stable
+          flutter-version: '3.24.3'
           channel: stable
 
       # 3. Install dependencies
